@@ -98,6 +98,8 @@ There are several familiar operator types you can use. These can also all be use
 | `startsWith`          | Non-strings will fail this test. Performs string.startsWith(value);
 | `endsWith`            | Non-strings will fail this test. Performs string.endsWith(value);
 | `containsValue`       | For objects and arrays, will check if they contain the specified value
+| `isEmpty`             | If null, undefined, empty array or empty object this is true
+| `isNotEmpty`          | if not null, not undefined, not empty array or not empty object this is true
 
 Another example, specifying a `key` and using `startsWith` 
 ```js

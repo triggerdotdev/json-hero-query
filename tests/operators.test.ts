@@ -3,6 +3,8 @@ import {
   EndsWithOperator,
   EqualOperator,
   GreaterThanOperator,
+  IsEmptyOperator,
+  IsNotEmptyOperator,
   LessThanOperator,
   LessThanOrEqualOperator,
   NotEqualOperator,
@@ -77,9 +79,45 @@ describe('Operator tests', () => {
 
   test('Contains value', () => {
     let operator = new ContainsValueOperator();
-    expect(operator.passes([0, 1, 2], 2)).toEqual(true)
-    expect(operator.passes([0, 1, 2], false)).toEqual(false)
-    expect(operator.passes(['Matt', 'James'], 'James')).toEqual(true)
-    expect(operator.passes({ name: 'James', age: 39}, 39)).toEqual(true)
+    expect(operator.passes([0, 1, 2], 2)).toEqual(true);
+    expect(operator.passes([0, 1, 2], false)).toEqual(false);
+    expect(operator.passes(['Matt', 'James'], 'James')).toEqual(true);
+    expect(operator.passes({ name: 'James', age: 39 }, 39)).toEqual(true);
+  });
+
+  test('Is empty', () => {
+    let operator = new IsEmptyOperator();
+    expect(operator.passes(null, null)).toEqual(true);
+    expect(operator.passes(undefined, null)).toEqual(true);
+    expect(operator.passes([], null)).toEqual(true);
+    expect(operator.passes({}, null)).toEqual(true);
+
+    expect(operator.passes([0, 1, 2], null)).toEqual(false);
+    expect(
+      operator.passes(
+        {
+          name: 'Matt',
+        },
+        null,
+      ),
+    ).toEqual(false);
+  });
+
+  test('Is not empty', () => {
+    let operator = new IsNotEmptyOperator();
+    expect(operator.passes(null, null)).toEqual(false);
+    expect(operator.passes(undefined, null)).toEqual(false);
+    expect(operator.passes([], null)).toEqual(false);
+    expect(operator.passes({}, null)).toEqual(false);
+
+    expect(operator.passes([0, 1, 2], null)).toEqual(true);
+    expect(
+      operator.passes(
+        {
+          name: 'Matt',
+        },
+        null,
+      ),
+    ).toEqual(true);
   });
 });

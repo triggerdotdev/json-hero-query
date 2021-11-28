@@ -23,6 +23,10 @@ class QueryOperatorFactory {
         return new EndsWithOperator();
       case 'containsValue':
         return new ContainsValueOperator();
+      case 'isEmpty':
+        return new IsEmptyOperator();
+      case 'isNotEmpty':
+        return new IsNotEmptyOperator();
       default:
         return null;
     }
@@ -85,20 +89,53 @@ class EndsWithOperator implements QueryOperator {
   }
 }
 
-class ContainsValueOperator implements  QueryOperator {
+class ContainsValueOperator implements QueryOperator {
   passes(value: any, test: any): boolean {
     if (typeof value != 'object') {
-      return false
+      return false;
     }
 
     for (const valueKey in value) {
-      let subValue = value[valueKey]
+      let subValue = value[valueKey];
       if (subValue === test) {
-        return true
+        return true;
       }
     }
 
-    return false
+    return false;
+  }
+}
+
+class IsEmptyOperator implements QueryOperator {
+  passes(value: any, test: any | null): boolean {
+    if (value == null || value == undefined) {
+      return true;
+    }
+
+    //can only be empty if it's an object (because not null)
+    if (typeof value != 'object') return false;
+
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (Object.keys(value).length === 0) {
+      return true;
+    }
+
+    return false;
+  }
+}
+
+class IsNotEmptyOperator implements QueryOperator {
+  private readonly emptyOperator = new IsEmptyOperator();
+
+  passes(value: any, test: any | null): boolean {
+    return !this.emptyOperator.passes(value, test);
   }
 }
 
@@ -113,5 +150,7 @@ export {
   LessThanOrEqualOperator,
   StartsWithOperator,
   EndsWithOperator,
-  ContainsValueOperator
+  ContainsValueOperator,
+  IsEmptyOperator,
+  IsNotEmptyOperator,
 };
