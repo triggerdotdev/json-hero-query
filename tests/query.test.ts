@@ -234,13 +234,13 @@ describe('Wildcard path query tests', () => {
     ];
 
     let query = new JSONHeroQuery(queryConfig);
-    let results = query.all(testObject1, { includePath: true});
+    let results = query.all(testObject1, { includePath: true });
 
-    expect(results.length).toEqual(1)
+    expect(results.length).toEqual(1);
 
-    let onlyResult = results[0]
-    expect(onlyResult.value).toEqual('James')
-    expect(onlyResult.path.toString()).toEqual('$.resultsList.1.name')
+    let onlyResult = results[0];
+    expect(onlyResult.value).toEqual('James');
+    expect(onlyResult.path.toString()).toEqual('$.resultsList.1.name');
   });
 
   test('First n from multiple sub items', () => {
@@ -261,19 +261,51 @@ describe('Wildcard path query tests', () => {
             type: 'operator',
             operatorType: 'startsWith',
             value: 'Far Cry',
-          }
-        ]
+          },
+        ],
       },
     ];
 
     let query = new JSONHeroQuery(queryConfig);
     let results = query.all(testObject1);
 
-    expect(results).toEqual([
-      'Far Cry 1',
-      'Far Cry 2',
-      'Far Cry 3',
-    ]);
+    expect(results).toEqual(['Far Cry 1', 'Far Cry 2', 'Far Cry 3']);
+  });
+
+  test('Is Empty test', () => {
+    let queryConfig = [
+      {
+        path: 'people',
+      },
+      {
+        path: '*',
+        filters: [
+          {
+            type: 'subPath',
+            path: 'friends',
+            operatorType: 'isEmpty',
+          },
+        ],
+      },
+      {
+        path: 'name',
+      },
+    ];
+
+    let query = new JSONHeroQuery(queryConfig);
+    let results = query.all({
+      people: [
+        {
+          name: 'Matt',
+        },
+        {
+          name: 'James',
+          friends: ['Matt'],
+        },
+      ],
+    });
+
+    expect(results).toEqual(['Matt']);
   });
 });
 
