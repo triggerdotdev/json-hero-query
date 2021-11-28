@@ -13,20 +13,20 @@ class JSONHeroQuery {
     }
 
     if (components.length === 0) {
-      this.components = []
-      return
+      this.components = [];
+      return;
     }
 
     //if components passed in are native objects then use them
-    let firstElement = components[0]
+    let firstElement = components[0];
     if (firstElement instanceof QueryComponent) {
       if (!(firstElement.path instanceof StartPathComponent)) {
-        this.components = [new QueryComponent(new StartPathComponent(), null), ...components]
-        return
+        this.components = [new QueryComponent(new StartPathComponent(), null), ...components];
+        return;
       }
 
-      this.components = components
-      return
+      this.components = components;
+      return;
     }
 
     //otherwise parse the object

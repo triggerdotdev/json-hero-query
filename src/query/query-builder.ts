@@ -15,12 +15,12 @@ class QueryBuilder {
 
     let pathBuilder = new PathBuilder();
 
-    components.push(new QueryComponent(new StartPathComponent(), null))
+    components.push(new QueryComponent(new StartPathComponent(), null));
 
     //skip the first index if there was already a StartPathComponent
     let startIndex = 0;
-    let firstPathComponent = pathBuilder.parseComponent(object[0]['path'])
-    if ((firstPathComponent instanceof StartPathComponent)) {
+    let firstPathComponent = pathBuilder.parseComponent(object[0]['path']);
+    if (firstPathComponent instanceof StartPathComponent) {
       startIndex = 1;
     }
 
