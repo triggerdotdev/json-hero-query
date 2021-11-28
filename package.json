@@ -1,5 +1,5 @@
 {
-  "name": "json-hero-query",
+  "name": "@jsonhero/query",
   "version": "1.0.0",
   "description": "An easy way to query and filter JSON objects",
   "main": "lib/index.js",
@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
@@ -25,8 +25,11 @@
     "Path",
     "Query"
   ],
-  "author": "matt-aitken",
+  "author": "Matt Aitken",
   "license": "GNU General Public License v3.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/matt-aitken/json-hero-query/issues"
   },
