@@ -21,6 +21,8 @@ class QueryOperatorFactory {
         return new StartsWithOperator();
       case 'endsWith':
         return new EndsWithOperator();
+      case 'containsValue':
+        return new ContainsValueOperator();
       default:
         return null;
     }
@@ -83,6 +85,23 @@ class EndsWithOperator implements QueryOperator {
   }
 }
 
+class ContainsValueOperator implements  QueryOperator {
+  passes(value: any, test: any): boolean {
+    if (typeof value != 'object') {
+      return false
+    }
+
+    for (const valueKey in value) {
+      let subValue = value[valueKey]
+      if (subValue === test) {
+        return true
+      }
+    }
+
+    return false
+  }
+}
+
 export {
   QueryOperator,
   QueryOperatorFactory,
@@ -94,4 +113,5 @@ export {
   LessThanOrEqualOperator,
   StartsWithOperator,
   EndsWithOperator,
+  ContainsValueOperator
 };

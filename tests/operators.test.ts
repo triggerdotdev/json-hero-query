@@ -1,4 +1,13 @@
-import { EndsWithOperator, EqualOperator, GreaterThanOperator, LessThanOperator, LessThanOrEqualOperator, NotEqualOperator, StartsWithOperator } from '../src/query/query-operators';
+import {
+  ContainsValueOperator,
+  EndsWithOperator,
+  EqualOperator,
+  GreaterThanOperator,
+  LessThanOperator,
+  LessThanOrEqualOperator,
+  NotEqualOperator,
+  StartsWithOperator,
+} from '../src/query/query-operators';
 
 describe('Operator tests', () => {
   test('Strict equal', () => {
@@ -64,5 +73,13 @@ describe('Operator tests', () => {
     expect(operator.passes('This should fail', 42)).toEqual(false);
     expect(operator.passes(13, 'Wrong type')).toEqual(false);
     expect(operator.passes(13, false)).toEqual(false);
+  });
+
+  test('Contains value', () => {
+    let operator = new ContainsValueOperator();
+    expect(operator.passes([0, 1, 2], 2)).toEqual(true)
+    expect(operator.passes([0, 1, 2], false)).toEqual(false)
+    expect(operator.passes(['Matt', 'James'], 'James')).toEqual(true)
+    expect(operator.passes({ name: 'James', age: 39}, 39)).toEqual(true)
   });
 });
