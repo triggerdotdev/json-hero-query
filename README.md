@@ -87,16 +87,17 @@ If the object fails the test then it will be excluded from the results.
 
 There are several familiar operator types you can use. These can also all be used in the `subPath` filter type.
 
-| Operator name | What it does
-| ---           | ---          
-| `==`          | Performs `==` on object and specified value. (not strict equality)
-| `!=`          | Performs `!=` on object and specified value. (not strict inequality)
-| `>`           | Performs `>` on object and specified value 
-| `>=`          | Performs `>=` on object and specified value
-| `<`           | Performs `<` on object and specified value
-| `<=`          | Performs `<=` on object and specified value
-| `startsWith`  | Non-strings will fail this test. Performs string.startsWith(value);
-| `endsWith`    | Non-strings will fail this test. Performs string.endsWith(value);
+| Operator name         | What it does
+| ---                   | ---          
+| `==`                  | Performs `==` on object and specified value. (not strict equality)
+| `!=`                  | Performs `!=` on object and specified value. (not strict inequality)
+| `>`                   | Performs `>` on object and specified value 
+| `>=`                  | Performs `>=` on object and specified value
+| `<`                   | Performs `<` on object and specified value
+| `<=`                  | Performs `<=` on object and specified value
+| `startsWith`          | Non-strings will fail this test. Performs string.startsWith(value);
+| `endsWith`            | Non-strings will fail this test. Performs string.endsWith(value);
+| `containsValue`       | For objects and arrays, will check if they contain the specified value
 
 Another example, specifying a `key` and using `startsWith` 
 ```js
