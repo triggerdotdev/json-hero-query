@@ -12,7 +12,7 @@ const { JSONHeroQuery } = require('@jsonhero/query');
 ```
 
 Or if you're using TypeScript:
-```js
+```ts
 import { JSONHeroQuery } from '@jsonhero/query';
 ```
 
@@ -67,7 +67,7 @@ let queryConfig = [
 ];
 
 let query = new JSONHeroQuery(queryConfig);
-let results = query.all(testObject1); 
+let results = query.all(employees); 
 //results is an array with the Matt, James and Eric objects in
 ```
 
@@ -118,7 +118,7 @@ let queryConfig = [
 ];
 
 let query = new JSONHeroQuery(queryConfig);
-let results = query.all(testObject1); 
+let results = query.all(employees); 
 //results is an array with just the James object in
 ```
 
@@ -144,7 +144,7 @@ let queryConfig = [
 ];
 
 let query = new JSONHeroQuery(queryConfig);
-let results = query.all(testObject1); 
+let results = query.all(employees); 
 //results = ['James', 'Eric', 'Dan']
 //note that this is just an array of strings, not objects, because we are specifying name in the path
 ```
@@ -175,7 +175,7 @@ let queryConfig = [
 ];
 
 let query = new JSONHeroQuery(queryConfig);
-let results = query.all(testObject1); 
+let results = query.all(employees); 
 //results = ['Matt', 'Eric']
 ```
 
@@ -222,6 +222,39 @@ let queryConfig = [
 ];
 
 let query = new JSONHeroQuery(queryConfig);
-let results = query.all(testObject1); 
+let results = query.all(employees); 
 //results = ['Matt', 'Eric', 'Dan']
+```
+
+### Getting paths as well as the results
+You can get the path objects as well as the values by passing an optional object when you query
+
+```js
+let queryConfig = [
+  {
+    path: 'people',
+  },
+  {
+    path: '*',
+    filters: [
+      {
+        type: 'subPath',
+        path: 'favouriteThings.*',
+        operatorType: 'startsWith',
+        value: 'Far Cry',
+      },
+    ],
+  },
+  {
+    path: 'name',
+  },
+];
+
+let query = new JSONHeroQuery(queryConfig);
+let results = query.all(employees, { includePath: true});
+//results will be an object like this 
+//{
+//  value: 'James',
+//  path: a JSONHeroPath for this element
+//}
 ```
