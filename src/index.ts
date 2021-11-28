@@ -1,5 +1,7 @@
+import { JSONHeroPath } from '@jsonhero/path';
+
 class JSONHeroQuery {
 
 }
 
-export default JSONHeroQuery;
+export { JSONHeroQuery };
