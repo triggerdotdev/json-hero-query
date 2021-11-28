@@ -4,6 +4,7 @@ import SubPathOperatorFilter from './filters/sub-path-operator-filter';
 import OrFilter from './filters/or-filter';
 import PathBuilder from '@jsonhero/path/lib/path/path-builder';
 import { JSONHeroPath } from '@jsonhero/path';
+import StartPathComponent from '@jsonhero/path/lib/path/start-path-component';
 
 class QueryBuilder {
   parse(object: any): QueryComponent[] {
@@ -14,7 +15,16 @@ class QueryBuilder {
 
     let pathBuilder = new PathBuilder();
 
-    for (let i = 0; i < object.length; i++) {
+    components.push(new QueryComponent(new StartPathComponent(), null))
+
+    //skip the first index if there was already a StartPathComponent
+    let startIndex = 0;
+    let firstPathComponent = pathBuilder.parseComponent(object[0]['path'])
+    if ((firstPathComponent instanceof StartPathComponent)) {
+      startIndex = 1;
+    }
+
+    for (let i = startIndex; i < object.length; i++) {
       let item = object[i];
       let path = pathBuilder.parseComponent(item['path']);
 

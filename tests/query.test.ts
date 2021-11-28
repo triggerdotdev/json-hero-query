@@ -236,7 +236,11 @@ describe('Wildcard path query tests', () => {
     let query = new JSONHeroQuery(queryConfig);
     let results = query.all(testObject1, { includePath: true});
 
-    expect(results).toEqual(['James']);
+    expect(results.length).toEqual(1)
+
+    let onlyResult = results[0]
+    expect(onlyResult.value).toEqual('James')
+    expect(onlyResult.path.toString()).toEqual('$.resultsList.1.name')
   });
 
   test('First n from multiple sub items', () => {

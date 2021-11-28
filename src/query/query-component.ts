@@ -11,7 +11,7 @@ class QueryComponent {
   }
 
   filter(previousResults: QueryResult[]): QueryResult[] {
-    let results: any[] = this.path.query(previousResults);
+    let results: QueryResult[] = this.path.query(previousResults);
 
     if (results === null || results.length === 0) {
       return [];

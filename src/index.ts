@@ -2,6 +2,7 @@ import { JSONHeroPath } from '@jsonhero/path';
 import QueryResult from '@jsonhero/path/lib/path/query-result';
 import { QueryComponent } from './query/query-component';
 import QueryBuilder from './query/query-builder';
+import StartPathComponent from '@jsonhero/path/lib/path/start-path-component';
 
 class JSONHeroQuery {
   readonly components: QueryComponent[];
@@ -19,6 +20,11 @@ class JSONHeroQuery {
     //if components passed in are native objects then use them
     let firstElement = components[0]
     if (firstElement instanceof QueryComponent) {
+      if (!(firstElement.path instanceof StartPathComponent)) {
+        this.components = [new QueryComponent(new StartPathComponent(), null), ...components]
+        return
+      }
+
       this.components = components
       return
     }
