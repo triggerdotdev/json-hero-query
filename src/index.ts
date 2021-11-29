@@ -47,7 +47,7 @@ class JSONHeroQuery {
   }
 
   first(object: any, options: PathOptions = { includePath: false }): any {
-    let results = this.all(object);
+    let results = this.all(object, options);
     if (results === null || results.length === 0) {
       return null;
     }

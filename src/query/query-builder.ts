@@ -5,6 +5,7 @@ import OrFilter from './filters/or-filter';
 import PathBuilder from '@jsonhero/path/lib/path/path-builder';
 import { JSONHeroPath } from '@jsonhero/path';
 import StartPathComponent from '@jsonhero/path/lib/path/start-path-component';
+import AndFilter from './filters/and-filter';
 
 class QueryBuilder {
   parse(object: any): QueryComponent[] {
@@ -57,6 +58,8 @@ class QueryBuilder {
             );
           case 'or':
             return new OrFilter(subData['subFilters']);
+          case 'and':
+            return new AndFilter(subData['subFilters']);
           default:
             throw new TypeError(`Unknown filter type: ${filterType}`);
         }
