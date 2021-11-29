@@ -229,6 +229,67 @@ let results = query.all(employees);
 //results = ['Matt', 'Eric', 'Dan']
 ```
 
+### And queries
+The top-level `filters` objects are `and` filters. If you need to test an `and` inside an `or` filter, you can easily do that:
+```js
+let queryConfig = [
+  {
+    path: 'people',
+  },
+  {
+    path: '*',
+    filters: [
+      {
+        type: 'or',
+        subFilters: [
+          {
+            type: 'and',
+            subFilters: [
+              {
+                type: 'subPath',
+                path: 'favouriteThings.*',
+                operatorType: '==',
+                value: 'Rocket League',
+              },
+              {
+                type: 'subPath',
+                path: 'favouriteThings.*',
+                operatorType: '==',
+                value: 'Monzo',
+              },
+            ],
+          },
+          {
+            type: 'and',
+            subFilters: [
+              {
+                type: 'subPath',
+                path: 'favouriteThings.*',
+                operatorType: '==',
+                value: 'Bitcoin',
+              },
+              {
+                type: 'subPath',
+                path: 'favouriteThings.*',
+                operatorType: '==',
+                value: 'Rocket League',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'name',
+  },
+];
+
+let query = new JSONHeroQuery(queryConfig);
+let results = query.all(employees); 
+//results = ['Matt', 'Eric']
+```
+
 ### Getting paths as well as the results
 You can get the path objects as well as the values by passing an optional object when you query
 
