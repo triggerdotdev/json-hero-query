@@ -79,6 +79,7 @@ There are three types of filters, these can be selected by using the `type` fiel
 | `operator`    | Allows you to perform logical operators tests on the current object
 | `subPath`     | Allows you to perform logical operator tests on the current object or any sub-objects using a path
 | `or`          | Allows you to add sub-filters where if any of the sub-filters pass, this filter will pass
+| `and`         | Allows you to add `and` conditions inside an `or`. The top-level `filters` is `and` already
 
 ### Operator filter and operator types
 The `operator` filter type applies the specified test to each object at that path.
