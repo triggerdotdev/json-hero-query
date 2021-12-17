@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matt-aitken/json-hero-query.git"
+    "url": "git+https://github.com/jsonhero-io/json-hero-query.git"
   },
   "keywords": [
     "JSON",
@@ -31,9 +31,9 @@
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/matt-aitken/json-hero-query/issues"
+    "url": "https://github.com/jsonhero-io/json-hero-query/issues"
   },
-  "homepage": "https://github.com/matt-aitken/json-hero-query",
+  "homepage": "https://github.com/jsonhero-io/json-hero-query",
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "jest": "^27.3.1",
